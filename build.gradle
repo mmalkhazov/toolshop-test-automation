@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id("io.qameta.allure") version "2.12.0"
+
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.seleniumhq.selenium:selenium-java:4.41.0")
+    implementation("org.testng:testng:7.12.0")
+    implementation("ch.qos.logback:logback-classic:1.5.32")
+
+    implementation("org.projectlombok:lombok:1.18.44")
+    annotationProcessor("org.projectlombok:lombok:1.18.44")  // ← add this
+
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.44")  // ← add this too for test classes
+    implementation("org.apache.httpcomponents:fluent-hc:4.5.14")
+    implementation("com.google.code.gson:gson:2.13.2")
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
+    implementation("io.rest-assured:rest-assured:6.0.0")
+
+    implementation("io.qameta.allure:allure-testng:2.34.0")
+
+}
+
+
+
+test {
+    useTestNG()
+}
+
+
+task qa(type:Test) {
+    useTestNG()
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+}
+
+task qa1(type: Test) {
+    useTestNG() {
+        def suite1 = project.hasProperty("suite1")
+        def suite2 = project.hasProperty("suite2")
+
+        if (suite1) {
+            suites 'src/test/resources/login.xml'
+        } else if (suite2) {
+            suites 'src/test/resources/registration.xml'
+        }
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+}

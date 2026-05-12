@@ -78,6 +78,10 @@ task apiTests(type: Test) {
     description = 'All API tests — user, product, cart'
     group = 'verification'
     useTestNG { suites 'src/test/resources/api.xml' }
+
+    environment "BASE_URL",      System.getenv("BASE_URL") ?: ""
+    environment "USER_EMAIL",    System.getenv("USER_EMAIL") ?: ""
+    environment "USER_PASSWORD", System.getenv("USER_PASSWORD") ?: ""
 }
 
 task uiTests(type: Test) {

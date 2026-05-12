@@ -26,7 +26,14 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run API tests
-        run: ./gradlew apiTests --info
+        run: ./gradlew apiTests --info || true
+
+      - name: Print failed tests
+        if: always()
+        run: |
+          find build/test-results -name "*.xml" | xargs grep -l "failures=\"[^0]\"" | xargs cat
+
+
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}

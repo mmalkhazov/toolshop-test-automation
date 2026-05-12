@@ -8,11 +8,13 @@ import com.toolshop.pages.ShoppingCartPage;
 import com.toolshop.tests.UI.TestBase;
 import io.qameta.allure.*;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Epic("E2E UI")
 @Feature("Checkout Flow")
 public class CheckoutFlowE2ETest extends TestBase {
+
 
 
     @Test

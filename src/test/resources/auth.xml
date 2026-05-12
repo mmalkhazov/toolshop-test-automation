@@ -1,0 +1,30 @@
+<!-- auth.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Authentication Tests" verbose="1">
+
+    <test name="UI - Login">
+        <classes>
+            <class name="com.toolshop.tests.UI.LoginTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Logout">
+        <classes>
+            <class name="com.toolshop.tests.UI.LogOutTests"/>
+        </classes>
+    </test>
+
+    <test name="API - Login">
+        <classes>
+            <class name="com.toolshop.tests.API.user.LoginUserApiTests"/>
+        </classes>
+    </test>
+
+    <test name="API - Registration">
+        <classes>
+            <class name="com.toolshop.tests.API.user.RegistrationUserApiTests"/>
+        </classes>
+    </test>
+
+</suite>

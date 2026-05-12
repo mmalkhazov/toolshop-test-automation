@@ -14,6 +14,13 @@ public class ProfilePageTests extends TestBase {
 
     @BeforeMethod
     public void precondition() {
+        new HomePage(driver).header.goToHomePage();
+
+        ProfilePage profilePage = new ProfilePage(driver);
+        if (profilePage.isUserLoggedIn()) {
+            profilePage.header.clickOnSignOutButton();
+        }
+
         new HomePage(driver).header.goToLoginInPage()
                 .enterUserData(new UserLoginData().defaultUser())
                 .clickOnLoginButton();

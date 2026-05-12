@@ -61,7 +61,7 @@ public class Header  {
 
 
     public HomePage clickOnSignOutButton(){
-        userName.click();          // ← open the dropdown first
+        userName.click();
         signOutButton.click();
         return new HomePage(driver);
     }

@@ -31,7 +31,7 @@ public class BaseClient {
                 .header("Authorization", "Bearer " + token);
     }
 
-    // ── without token (public endpoints) ──────────────────
+
     private RequestSpecification createPublicRequest() {
         return given()
                 .baseUri(baseUri)
@@ -71,13 +71,6 @@ public class BaseClient {
                 .post(endpoint);
     }
 
-//    protected Response postPublicRequest(String endpoint, Object body) {
-//        return createPublicRequest()
-//                .body(body)
-//                .when()
-//                .post(endpoint);
-//    }
-
     protected Response postWithInvalidTokenRequest(String endpoint, Object body) {
         return createInvalidRequest()
                 .body(body)
@@ -85,23 +78,18 @@ public class BaseClient {
                 .post(endpoint);
     }
 
-    protected Response postWithInvalidTokenRequest(String endpoint) {
-        return createInvalidRequest()
-                .when()
-                .post(endpoint);
-    }
 
 
     protected Response getRequest(String endpoint, String getEndpoint) {
         return createBaseRequest()
                 .when()
-                .get(endpoint, getEndpoint);
+                .get(endpoint + getEndpoint);
     }
 
     protected Response getListRequest(String endpoint) {
         return createPublicRequest()
                 .when()
-                .get(endpoint);  // ← just /products, no /me
+                .get(endpoint);
     }
 
 
@@ -114,7 +102,7 @@ public class BaseClient {
     protected Response getInvalidRequest(String endpoint, String getEndpoint) {
         return createInvalidRequest()
                 .when()
-                .get(endpoint, getEndpoint);
+                .get(endpoint + getEndpoint);
     }
 
     protected Response getByIdRequest(String endpoint, String id) {
@@ -136,7 +124,6 @@ public class BaseClient {
     }
 
 
-    // GET with one query param
     protected Response getPublicRequestWithParam(String endpoint, String paramName, Object paramValue) {
         return createPublicRequest()
                 .queryParam(paramName, paramValue)
@@ -144,7 +131,6 @@ public class BaseClient {
                 .get(endpoint);
     }
 
-    // GET with two query params
     protected Response getPublicRequestWithParams(String endpoint,
                                                   String param1, Object value1,
                                                   String param2, Object value2) {
@@ -157,13 +143,6 @@ public class BaseClient {
 
     }
 
-//
-//    protected Response sendUpdateRequest(String endpoint,Object body, int id) {
-//        return createBaseRequest()
-//                .body(body)
-//                .when()
-//                .put(endpoint + "/" + id);
-//    }
 
     protected Response sendDeleteRequest(String endpoint, String id) {
         return createBaseRequest()
@@ -177,13 +156,6 @@ public class BaseClient {
                 .delete(endpoint);
     }
 
-
-
-    protected Response deleteByIdRequest(String endpoint, String id) {
-        return createBaseRequest()
-                .when()
-                .delete(endpoint + "/" + id);
-    }
 
     protected Response deleteByIdPublicRequest(String endpoint, String id) {
         return createPublicRequest()

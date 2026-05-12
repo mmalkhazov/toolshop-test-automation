@@ -17,7 +17,7 @@ public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
 
     protected ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
-    public WebDriver driver;
+    public static WebDriver driver;
 
 
     @BeforeSuite

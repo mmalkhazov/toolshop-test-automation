@@ -203,7 +203,6 @@ public class RegistrationPage extends BasePage {
 
 
     public String getPasswordInvalidErrorMessage() {
-//        waitForVisibility(passwordInvalidError);
         return passwordInvalidError.getText().trim();
     }
 
@@ -214,7 +213,6 @@ public class RegistrationPage extends BasePage {
     public String getPasswordInvalidLengthErrorMessage() {
         return passwordInvalidLengthError.getText();
     }
-
 
 
 }

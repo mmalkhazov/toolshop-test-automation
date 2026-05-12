@@ -1,0 +1,58 @@
+<!-- regression.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Regression" verbose="1">
+
+    <test name="API - User">
+        <classes>
+            <class name="com.toolshop.tests.API.user.LoginUserApiTests"/>
+            <class name="com.toolshop.tests.API.user.RegistrationUserApiTests"/>
+            <class name="com.toolshop.tests.API.user.GetUserApiTests"/>
+            <class name="com.toolshop.tests.API.user.GetUserByIdApiTests"/>
+        </classes>
+    </test>
+
+    <test name="API - Products">
+        <classes>
+            <class name="com.toolshop.tests.API.product.GetAllProductsApiTests"/>
+            <class name="com.toolshop.tests.API.product.GetProductByIdApiTests"/>
+            <class name="com.toolshop.tests.API.product.SearchProductsApiTests"/>
+        </classes>
+    </test>
+
+    <test name="API - Cart">
+        <classes>
+            <class name="com.toolshop.tests.API.cart.CreateCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.AddItemToCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.GetCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.DeleteCartApiTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Authentication">
+        <classes>
+            <class name="com.toolshop.tests.UI.LoginTests"/>
+            <class name="com.toolshop.tests.UI.LogOutTests"/>
+            <class name="com.toolshop.tests.UI.RegistrationTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Catalog">
+        <classes>
+            <class name="com.toolshop.tests.UI.NavigationTests"/>
+            <class name="com.toolshop.tests.UI.ProductDetailPageTests"/>
+            <class name="com.toolshop.tests.UI.ProductSearchTests"/>
+            <class name="com.toolshop.tests.UI.SortingTests"/>
+            <class name="com.toolshop.tests.UI.ProfilePageTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Cart">
+        <classes>
+            <class name="com.toolshop.tests.UI.Cart.AddProductToCardTest"/>
+            <class name="com.toolshop.tests.UI.Cart.DeleteProductFromCardTest"/>
+            <class name="com.toolshop.tests.UI.Cart.UpdateProductInShoppingCartTest"/>
+        </classes>
+    </test>
+
+</suite>

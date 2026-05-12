@@ -17,7 +17,7 @@ public class ApiTestBase {
     protected UserApiClient userClient;
 
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void setUp() {
         api.startApi();
 

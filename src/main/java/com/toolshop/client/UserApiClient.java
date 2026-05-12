@@ -22,9 +22,6 @@ public class UserApiClient extends BaseClient {
 
     }
 
-    // POST /users/register 🔒
-    // scratch: given().baseUri(...).header("Authorization","Bearer "+token).body(...).post("/users/register")
-
     public ValidatableResponse registerUser(RegisterRequestDto registerRequest) {
         return postRequest(ENDPOINT + "/register", registerRequest)
                 .then();
@@ -38,8 +35,6 @@ public class UserApiClient extends BaseClient {
     }
 
 
-    // GET /users/{id} 🔒
-    // scratch: given().header("Authorization","Bearer "+token).get("/users/1")
     public ValidatableResponse getUserById(String id) {
         return getByIdRequest(ENDPOINT, id)
        .then();
@@ -62,7 +57,7 @@ public class UserApiClient extends BaseClient {
     }
 
 
-//explain
+
 public String registerAndGetId(RegisterRequestDto request) {
     return registerUser(request)
             .assertThat().statusCode(201)
@@ -70,7 +65,7 @@ public String registerAndGetId(RegisterRequestDto request) {
             .path("id");
 }
 
-    //explain
+
     public String loginAndGetToken(String email, String password) {
         return loginUser(AuthRequestDto.builder()
                 .email(email)

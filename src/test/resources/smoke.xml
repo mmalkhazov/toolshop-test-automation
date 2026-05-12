@@ -1,0 +1,46 @@
+<!-- smoke.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Smoke" verbose="1">
+
+    <test name="Smoke - API Health">
+        <classes>
+            <class name="com.toolshop.tests.API.user.LoginUserApiTests">
+                <methods>
+                    <include name="loginWithValidCredentialsPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.product.GetAllProductsApiTests">
+                <methods>
+                    <include name="getAllProductsPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.cart.CreateCartApiTests">
+                <methods>
+                    <include name="createCartPositiveTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Smoke - UI Health">
+        <classes>
+            <class name="com.toolshop.tests.UI.LoginTests">
+                <methods>
+                    <include name="loginPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.NavigationTests">
+                <methods>
+                    <include name="clickHomeNavigatesToHomePageTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.Cart.AddProductToCardTest">
+                <methods>
+                    <include name="addToCardTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

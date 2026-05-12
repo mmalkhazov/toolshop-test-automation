@@ -1,0 +1,32 @@
+<!-- ui.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="UI Tests" verbose="1">
+
+    <test name="UI - Authentication">
+        <classes>
+            <class name="com.toolshop.tests.UI.LoginTests"/>
+            <class name="com.toolshop.tests.UI.LogOutTests"/>
+            <class name="com.toolshop.tests.UI.RegistrationTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Catalog">
+        <classes>
+            <class name="com.toolshop.tests.UI.NavigationTests"/>
+            <class name="com.toolshop.tests.UI.ProductDetailPageTests"/>
+            <class name="com.toolshop.tests.UI.ProductSearchTests"/>
+            <class name="com.toolshop.tests.UI.SortingTests"/>
+            <class name="com.toolshop.tests.UI.ProfilePageTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Cart">
+        <classes>
+            <class name="com.toolshop.tests.UI.Cart.AddProductToCardTest"/>
+            <class name="com.toolshop.tests.UI.Cart.DeleteProductFromCardTest"/>
+            <class name="com.toolshop.tests.UI.Cart.UpdateProductInShoppingCartTest"/>
+        </classes>
+    </test>
+
+</suite>

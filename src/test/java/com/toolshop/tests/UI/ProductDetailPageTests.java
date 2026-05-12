@@ -14,6 +14,7 @@ public class ProductDetailPageTests extends TestBase{
 
     @BeforeMethod
     public void precondition(){
+        new HomePage(driver).header.goToHomePage();
         new HomePage(driver).getProductCombinationPliers();
     }
 

@@ -2,8 +2,6 @@ package com.toolshop.config;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.util.Map;
 
@@ -15,7 +13,7 @@ public class ApiManager {
     private static final String BASE_URL      = ConfigManager.get("base.url");
     private static final String EMAIL         = ConfigManager.get("user.email");
     private static final String PASSWORD      = ConfigManager.get("user.password");
-    private static final String INVALID_TOKEN = "invalid_token_value";
+
 
 
 
@@ -40,7 +38,6 @@ public class ApiManager {
     }
 
     public String getToken()        { return token; }
-    public String getInvalidToken() { return INVALID_TOKEN; }
     public String getBaseUrl()      { return BASE_URL; }
 
 

@@ -26,19 +26,18 @@ public class CartApiClient extends BaseClient{
         return postRequest(ENDPOINT, id)
                 .then();
     }
-    // POST /carts/{id} — add item — public
+
     public ValidatableResponse addItemToCart(String cartId, CartItemRequestDto item) {
         return postPublicRequest(ENDPOINT + "/" + cartId, item)
                 .then();
     }
 
-    // POST /carts/{id} with invalid product id
+
     public ValidatableResponse addItemToCartInvalid(String cartId, CartItemRequestDto item) {
         return postPublicRequest(ENDPOINT + "/" + cartId, item)
                 .then();
     }
 
-    // precondition helper
     public String createCartAndGetId() {
         return createCart()
                 .assertThat().statusCode(201)

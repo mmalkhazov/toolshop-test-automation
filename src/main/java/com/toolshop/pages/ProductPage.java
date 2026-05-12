@@ -73,6 +73,7 @@ public class ProductPage extends BasePage {
     WebElement addToFavouritesButton;
 
     public boolean isAddToFavouritesButtonDisplayed() {
+
         return addToFavouritesButton.isDisplayed();
     }
 
@@ -80,11 +81,13 @@ public class ProductPage extends BasePage {
     WebElement compareButton;
 
     public boolean isCompareButtonDisplayed() {
+
         return compareButton.isDisplayed();
     }
 
 
     public boolean isAddToCartButtonDisplayed() {
+
         return addToCartButton.isDisplayed();
     }
 

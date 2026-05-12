@@ -6,14 +6,20 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
 public class ApplicationManager {
+
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
+
 
     String browser;
     public WebDriver driver;
@@ -26,7 +32,18 @@ public class ApplicationManager {
 
     public WebDriver starTest() {
         if (browser.equals("chrome")) {
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
+                logger.info("Launching Chrome in headless mode");
+                options.addArguments(
+                        "--headless=new",
+                        "--no-sandbox",
+                        "--disable-dev-shm-usage",
+                        "--disable-gpu",
+                        "--window-size=1920,1080"
+                );
+            }
+            driver = new ChromeDriver(options);
         } else if (browser.equals("firefox")) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.addPreference("intl.accept_languages", "en-US, en");
@@ -43,7 +60,9 @@ public class ApplicationManager {
     }
 
     public void stopTest() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 
@@ -65,6 +84,9 @@ public class ApplicationManager {
         return screenshot.getAbsolutePath();
     }
 
+    public void navigateToHome() {
+        driver.get("https://practicesoftwaretesting.com/");
+    }
 
 }
 

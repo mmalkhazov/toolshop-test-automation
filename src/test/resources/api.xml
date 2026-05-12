@@ -1,0 +1,32 @@
+<!-- api.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API Tests" verbose="1">
+
+    <test name="API - User">
+        <classes>
+            <class name="com.toolshop.tests.API.user.LoginUserApiTests"/>
+            <class name="com.toolshop.tests.API.user.RegistrationUserApiTests"/>
+            <class name="com.toolshop.tests.API.user.GetUserApiTests"/>
+            <class name="com.toolshop.tests.API.user.GetUserByIdApiTests"/>
+        </classes>
+    </test>
+
+    <test name="API - Products">
+        <classes>
+            <class name="com.toolshop.tests.API.product.GetAllProductsApiTests"/>
+            <class name="com.toolshop.tests.API.product.GetProductByIdApiTests"/>
+            <class name="com.toolshop.tests.API.product.SearchProductsApiTests"/>
+        </classes>
+    </test>
+
+    <test name="API - Cart">
+        <classes>
+            <class name="com.toolshop.tests.API.cart.CreateCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.AddItemToCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.GetCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.DeleteCartApiTests"/>
+        </classes>
+    </test>
+
+</suite>

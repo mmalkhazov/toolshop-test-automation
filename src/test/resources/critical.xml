@@ -1,0 +1,174 @@
+<!-- critical.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Critical Tests" verbose="1">
+
+    <test name="Critical - API User">
+        <classes>
+            <class name="com.toolshop.tests.API.user.LoginUserApiTests">
+                <methods>
+                    <include name="loginWithValidCredentialsPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.user.RegistrationUserApiTests">
+                <methods>
+                    <include name="registerValidUserPositiveTest"/>
+                    <include name="registerDuplicateEmailNegativeTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.user.GetUserApiTests">
+                <methods>
+                    <include name="getPositiveTests"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.user.GetUserByIdApiTests">
+                <methods>
+                    <include name="getUserByIdPositiveTest"/>
+                    <include name="getUserByIdWithInvalidTokenNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical - API Products">
+        <classes>
+            <class name="com.toolshop.tests.API.product.GetAllProductsApiTests">
+                <methods>
+                    <include name="getAllProductsPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.product.GetProductByIdApiTests">
+                <methods>
+                    <include name="getProductByIdPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.product.SearchProductsApiTests">
+                <methods>
+                    <include name="searchProductsByExistingNamePositiveTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical - API Cart">
+        <classes>
+            <class name="com.toolshop.tests.API.cart.CreateCartApiTests">
+                <methods>
+                    <include name="createCartPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.cart.AddItemToCartApiTests">
+                <methods>
+                    <include name="addItemToCartPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.cart.GetCartApiTests">
+                <methods>
+                    <include name="getCartWithItemPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.cart.DeleteCartApiTests">
+                <methods>
+                    <include name="deleteCartWithItemPositiveTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical - API E2E">
+        <classes>
+            <class name="com.toolshop.tests.API.e2e.ShoppingFlowE2ETest">
+                <methods>
+                    <include name="fullShoppingFlowE2ETest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical - UI Authentication">
+        <classes>
+            <class name="com.toolshop.tests.UI.LoginTests">
+                <methods>
+                    <include name="loginPositiveTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.LogOutTests">
+                <methods>
+                    <include name="userCanLogOutPositiveTest"/>
+                    <include name="userIsNotLoggedInAfterLogoutTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.RegistrationTests">
+                <methods>
+                    <include name="registrationPositiveTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical - UI Catalog">
+        <classes>
+            <class name="com.toolshop.tests.UI.NavigationTests">
+                <methods>
+                    <include name="clickHomeNavigatesToHomePageTest"/>
+                    <include name="clickSignInNavigatesToLoginPageTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.ProductDetailPageTests">
+                <methods>
+                    <include name="productNameIsDisplayedTest"/>
+                    <include name="productPriceIsDisplayedTest"/>
+                    <include name="addToCartButtonIsDisplayedTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.SortingTests">
+                <methods>
+                    <include name="sortingAscendingByPriceTest"/>
+                    <include name="sortingDescendingByPriceTest"/>
+                    <include name="filterByCategoryHandToolsTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.ProfilePageTests">
+                <methods>
+                    <include name="userIsLoggedInPositiveTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical - UI Cart">
+        <classes>
+            <class name="com.toolshop.tests.UI.Cart.AddProductToCardTest">
+                <methods>
+                    <include name="addToCardTest"/>
+                    <include name="cartBadgeUpdatesAfterAddingProductTest"/>
+                    <include name="addMultipleQuantityToCartTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.Cart.DeleteProductFromCardTest">
+                <methods>
+                    <include name="deleteItemFromCardTest"/>
+                    <include name="cartIsEmptyAfterRemovingItemTest"/>
+                    <include name="cartBadgeDisappearsAfterRemovingItemTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.UI.Cart.UpdateProductInShoppingCartTest">
+                <methods>
+                    <include name="updateQuantityTotalRecalculatesTest"/>
+                    <include name="decreaseQuantityTotalRecalculatesTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical - UI E2E">
+        <classes>
+            <class name="com.toolshop.tests.UI.e2e.CheckoutFlowE2ETest">
+                <methods>
+                    <include name="userCompleteFullCheckoutFlowTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

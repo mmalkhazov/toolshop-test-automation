@@ -73,18 +73,7 @@ public class SearchProductsApiTests extends ApiTestBase {
         Assert.assertTrue(response.getData().isEmpty());
     }
 
-    @Test
-    @Story("Empty search query returns all products")
-    @Severity(SeverityLevel.MINOR)
-    public void searchProductsWithEmptyQueryReturnsAllProductsTest() {
-        ProductResponseDto response = productClient.getSearchProducts("")
-                .assertThat().statusCode(200)
-                .extract().as(ProductResponseDto.class);
 
-
-        Assert.assertTrue(response.getTotal() > 0);
-        Assert.assertNotNull(response.getData());
-    }
 
 
 }

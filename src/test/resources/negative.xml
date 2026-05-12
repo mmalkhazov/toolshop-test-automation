@@ -1,20 +1,122 @@
+<!-- negative.xml -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Negative" verbose="1">
-    <test name="Negative">
+<suite name="Negative Tests" verbose="1">
+
+    <test name="API Negative - User Auth">
         <classes>
-            <class name="com.toolshop.tests.UI.LoginTests">
+            <class name="com.toolshop.tests.API.user.LoginUserApiTests">
                 <methods>
-                    <include name=".*Negative.*">
-                    </include>
-                </methods>
-            </class>
-            <class name="com.toolshop.tests.UI.RegistrationTests">
-                <methods>
-                    <include name=".*Negative.*">
-                    </include>
+                    <include name="loginWithWrongPasswordNegativeTest"/>
+                    <include name="loginWithWrongEmailNegativeTest"/>
+                    <include name="loginWithEmptyEmailNegativeTest"/>
+                    <include name="loginWithEmptyPasswordNegativeTest"/>
+                    <include name="loginWithInvalidEmailFormatNegativeTest"/>
                 </methods>
             </class>
         </classes>
     </test>
+
+    <test name="API Negative - Registration">
+        <classes>
+            <class name="com.toolshop.tests.API.user.RegistrationUserApiTests">
+                <methods>
+                    <include name="registerWithoutEmailNegativeTest"/>
+                    <include name="registerWithoutPasswordNegativeTest"/>
+                    <include name="registerWithoutFirstNameNegativeTest"/>
+                    <include name="registerWithWeakPasswordNegativeTest"/>
+                    <include name="registerDuplicateEmailNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="API Negative - User">
+        <classes>
+            <class name="com.toolshop.tests.API.user.GetUserApiTests">
+                <methods>
+                    <include name="getNegativeTests"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.user.GetUserByIdApiTests">
+                <methods>
+                    <include name="getUserByIdWithInvalidIdNegativeTest"/>
+                    <include name="getUserByIdWithInvalidTokenNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="API Negative - Products">
+        <classes>
+            <class name="com.toolshop.tests.API.product.GetAllProductsApiTests">
+                <methods>
+                    <include name="getAllProductsWithWrongMethodNegativeTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.product.GetProductByIdApiTests">
+                <methods>
+                    <include name="getProductByInvalidIdNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="API Negative - Cart">
+        <classes>
+            <class name="com.toolshop.tests.API.cart.AddItemToCartApiTests">
+                <methods>
+                    <include name="addItemWithoutProductIdNegativeTest"/>
+                    <include name="addItemWithZeroQuantityNegativeTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.cart.GetCartApiTests">
+                <methods>
+                    <include name="getCartWithInvalidIdNegativeTest"/>
+                </methods>
+            </class>
+            <class name="com.toolshop.tests.API.cart.DeleteCartApiTests">
+                <methods>
+                    <include name="deleteCartWithInvalidIdNegativeTest"/>
+                    <include name="deleteAlreadyDeletedCartNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="UI Negative - Login">
+        <classes>
+            <class name="com.toolshop.tests.UI.LoginTests">
+                <methods>
+                    <include name="loginWithWrongEmailNegativeTest"/>
+                    <include name="loginWithWrongPasswordNegativeTest"/>
+                    <include name="loginWithInvalidEmailNegativeTest"/>
+                    <include name="loginWithInvalidPasswordNegativeTest"/>
+                    <include name="loginWithEmptyEmailFieldNegativeTest"/>
+                    <include name="loginWithEmptyPasswordFieldNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="UI Negative - Registration">
+        <classes>
+            <class name="com.toolshop.tests.UI.RegistrationTests">
+                <methods>
+                    <include name="registrationWithoutFirstNameNegativeTest"/>
+                    <include name="registrationWithoutLastNameNegativeTest"/>
+                    <include name="registrationWithoutDateOfBirthNegativeTest"/>
+                    <include name="registrationInvalidDateOfBirthNegativeTest"/>
+                    <include name="registrationWithoutPostalCodeNegativeTest"/>
+                    <include name="registrationWithoutCountryNegativeTest"/>
+                    <include name="registrationWithoutPhoneNegativeTest"/>
+                    <include name="registrationWithoutEmailNegativeTest"/>
+                    <include name="registrationWithoutPasswordNegativeTest"/>
+                    <include name="registrationWithoutSpecialSymbolPasswordNegativeTest"/>
+                    <include name="registrationWithInvalidLengthPasswordNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>

@@ -1,0 +1,32 @@
+<!-- catalog.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Catalog Tests" verbose="1">
+
+    <test name="API - Products">
+        <classes>
+            <class name="com.toolshop.tests.API.product.GetAllProductsApiTests"/>
+            <class name="com.toolshop.tests.API.product.GetProductByIdApiTests"/>
+            <class name="com.toolshop.tests.API.product.SearchProductsApiTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Product Details">
+        <classes>
+            <class name="com.toolshop.tests.UI.ProductDetailPageTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Search">
+        <classes>
+            <class name="com.toolshop.tests.UI.ProductSearchTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Sorting and Filtering">
+        <classes>
+            <class name="com.toolshop.tests.UI.SortingTests"/>
+        </classes>
+    </test>
+
+</suite>

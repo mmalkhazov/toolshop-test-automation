@@ -7,7 +7,7 @@ public class ProductApiClient extends BaseClient{
 
 
     private static final String ENDPOINT = "/products";
-//    private static final String GET_ENDPOINT = "/me";
+
 
     public ProductApiClient(String baseUri) {
         super(baseUri);
@@ -16,25 +16,24 @@ public class ProductApiClient extends BaseClient{
         super(baseUri, token);
     }
 
-    // GET /products — no lock, public
+
     public ValidatableResponse getAllProducts() {
         return getListRequest(ENDPOINT)
                 .then();
     }
 
-    // GET /products/{id} — no lock, public
     public ValidatableResponse getProductById(String id) {
         return getByIdPublicRequest(ENDPOINT, id)
                 .then();
     }
 
-    // GET /products?by_category_id={id}
+
     public ValidatableResponse getProductsByCategory(int categoryId) {
         return getPublicRequestWithParam(ENDPOINT, "by_category_id", categoryId)
                 .then();
     }
 
-    // GET /products?sort={sort}&order={order}
+
     public ValidatableResponse getProductsSorted(String sort, String order) {
         return getPublicRequestWithParams(ENDPOINT,
                 "sort",  sort,
@@ -72,6 +71,7 @@ public class ProductApiClient extends BaseClient{
 
                 );
     }
+
     public ValidatableResponse getSearchProductsNoParam() {
         return getPublicRequest(ENDPOINT + "/search","")
                 .then();

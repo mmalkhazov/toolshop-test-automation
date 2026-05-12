@@ -33,9 +33,9 @@ public class BasePage {
         if (text != null) {
             click(element);
             element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-            element.sendKeys(Keys.DELETE);      // ← explicitly delete selected text
+            element.sendKeys(Keys.DELETE);
             if (!text.isEmpty()) {
-                element.sendKeys(text);         // ← only type if there's something to type
+                element.sendKeys(text);
             }
             element.sendKeys(Keys.TAB);
         }

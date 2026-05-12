@@ -1,7 +1,6 @@
 package com.toolshop.models;
 
-import com.toolshop.pages.BasePage;
-import org.openqa.selenium.WebDriver;
+
 
 public class User  {
 

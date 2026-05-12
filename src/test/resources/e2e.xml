@@ -1,0 +1,18 @@
+<!-- e2e.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="E2E Tests" verbose="1">
+
+    <test name="E2E - API Shopping Flow">
+        <classes>
+            <class name="com.toolshop.tests.API.e2e.ShoppingFlowE2ETest"/>
+        </classes>
+    </test>
+
+    <test name="E2E - UI Checkout Flow">
+        <classes>
+            <class name="com.toolshop.tests.UI.e2e.CheckoutFlowE2ETest"/>
+        </classes>
+    </test>
+
+</suite>

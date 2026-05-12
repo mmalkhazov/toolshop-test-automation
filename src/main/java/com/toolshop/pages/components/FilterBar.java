@@ -59,7 +59,8 @@ public class FilterBar {
         selectSortingOption("Name (Z - A)");
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.stalenessOf(productName.get(0)));
-
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfAllElements(productName));
         return this;
     }
 
@@ -68,21 +69,22 @@ public class FilterBar {
 
 
     public FilterBar selectFilterByCategory(String filterName) {
-        for(WebElement category:filterCategories){
-            if(category.getText().contains(filterName)){
+        String firstProductBefore = productName.get(0).getText();
+
+        for (WebElement category : filterCategories) {
+            if (category.getText().contains(filterName)) {
                 category.click();
                 break;
-
             }
-
         }
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-//                .until(ExpectedConditions.stalenessOf(productName.get(0)));
-                .until(ExpectedConditions.visibilityOfAllElements(productName));
+
+        if (!filterName.equals("Hand Tools")) {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(driver -> !productName.get(0).getText().equals(firstProductBefore));
+        }
 
         return this;
     }
-
 
     @FindBy(xpath = "//span[@data-test='product-price']")
     List<WebElement> productPrice;
@@ -94,12 +96,12 @@ public class FilterBar {
     public List<Double> sortedByPriceList() {
         List<Double> newList = new ArrayList<>();
 
-//        while (switchPages()) {
+
         for (WebElement p : productPrice) {
             newList.add(Double.valueOf(
                     p.getText().replace("$", "")));
         }
-//        }
+
         return newList;
     }
 
@@ -111,44 +113,44 @@ public class FilterBar {
 
 
     public boolean isSortedByPriceAscending() {
-        List<Double> actual = getAllPrices(); // текущий порядок на UI
+        List<Double> actual = getAllPrices();
 
-        List<Double> sorted = new ArrayList<>(actual); // копия списка
-        Collections.sort(sorted); // сортируем копию
+        List<Double> sorted = new ArrayList<>(actual);
+        Collections.sort(sorted);
         System.out.println("Actual after: " + actual);
         System.out.println("Sorted after: " + sorted);
-        return actual.equals(sorted); // сравниваем
+        return actual.equals(sorted);
     }
 
     public boolean isSortedByPriceDescending() {
-        List<Double> actual = getAllPrices(); // текущий порядок на UI
+        List<Double> actual = getAllPrices();
 
-        List<Double> sorted = new ArrayList<>(actual); // копия списка
-        Collections.sort(sorted, Collections.reverseOrder()); // сортируем копию
+        List<Double> sorted = new ArrayList<>(actual);
+        Collections.sort(sorted, Collections.reverseOrder());
 
         System.out.println("Actual after: " + actual);
         System.out.println("Sorted after: " + sorted);
-        return actual.equals(sorted); // сравниваем
+        return actual.equals(sorted);
     }
 
     public boolean isSortedByNameAscending() {
-        List<String> actual = getAllNames(); // текущий порядок на UI
+        List<String> actual = getAllNames();
 
-        List<String> sorted = new ArrayList<>(actual); // копия списка
-        Collections.sort(sorted, String.CASE_INSENSITIVE_ORDER); // сортируем копию
+        List<String> sorted = new ArrayList<>(actual);
+        Collections.sort(sorted, String.CASE_INSENSITIVE_ORDER);
         System.out.println("Actual after: " + actual);
         System.out.println("Sorted after: " + sorted);
-        return actual.equals(sorted); // сравниваем
+        return actual.equals(sorted);
     }
 
     public boolean isSortedByNameDescending() {
-        List<String> actual = getAllNames(); // текущий порядок на UI
+        List<String> actual = getAllNames();
 
-        List<String> sorted = new ArrayList<>(actual); // копия списка
-        Collections.sort(sorted, Collections.reverseOrder(String.CASE_INSENSITIVE_ORDER)); // сортируем копию
+        List<String> sorted = new ArrayList<>(actual);
+        Collections.sort(sorted, Collections.reverseOrder(String.CASE_INSENSITIVE_ORDER));
         System.out.println("Actual after: " + actual);
         System.out.println("Sorted after: " + sorted);
-        return actual.equals(sorted); // сравниваем
+        return actual.equals(sorted);
     }
 
 
@@ -197,49 +199,39 @@ public class FilterBar {
             String text = new WebDriverWait(driver, Duration.ofSeconds(10))
                     .ignoring(StaleElementReferenceException.class)
                     .until(driver ->
-                            getProductsPrice().get(index).getText() // ✅ fresh fetch every retry
+                            getProductsPrice().get(index).getText()
                     );
             prices.add(Double.valueOf(text.replace("$", "").trim()));
         }
         return prices;
     }
 
+
     private List<String> getNamesFromCurrentPage() {
         List<String> names = new ArrayList<>();
-        int size = getProductsName().size();
-
-        for (int i = 0; i < size; i++) {
-            final int index = i;
-            String text = new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(driver ->
-                            getProductsName().get(index).getText() // ✅ fresh fetch every retry
-                    );
-            names.add(text.trim());
+        for (WebElement el : getProductsName()) {
+            names.add(el.getText().trim());
         }
         return names;
     }
-
-
 
     //                                it works
     public List<Double> getAllPrices() {
         List<Double> allPrices = new ArrayList<>();
         int totalPages = getPageLinks().size();
 
-//        should change to "do while" loop
-        // read page 1 without clicking
+
         List<Double> page1 = getPricesFromCurrentPage();
         System.out.println("Page 1: " + page1);
         allPrices.addAll(page1);
 
         for (int i = 1; i < totalPages; i++) {
             final String previousFirstPrice =
-                    getProductsPrice().get(0).getText(); // remember current first price
+                    getProductsPrice().get(0).getText();
 
             getPageLinks().get(i).click();
 
-            // ✅ wait until first price ACTUALLY changes
+
             new WebDriverWait(driver, Duration.ofSeconds(10))
                     .ignoring(StaleElementReferenceException.class)
                     .until(driver ->
@@ -256,33 +248,28 @@ public class FilterBar {
 
     public List<String> getAllNames() {
         List<String> allNames = new ArrayList<>();
-        int totalPages = getPageLinks().size();
 
-        // read page 1 without clicking
-        List<String> page1 = getNamesFromCurrentPage();
-        System.out.println("Page 1: " + page1);
-        allNames.addAll(page1);
+        allNames.addAll(getNamesFromCurrentPage());
 
-        for (int i = 1; i < totalPages; i++) {
-            final String previousFirstName =
-                    getProductsName().get(0).getText(); // remember current first name
+        int i = 1;
+        while (i < getPageLinks().size()) {
+            final String previousFirstName = getProductsName().get(0).getText();
+            final int pageIndex = i;
 
-            getPageLinks().get(i).click();
+            getPageLinks().get(pageIndex).click();
 
-            // ✅ wait until first price ACTUALLY changes
             new WebDriverWait(driver, Duration.ofSeconds(10))
                     .ignoring(StaleElementReferenceException.class)
                     .until(driver ->
                             !getProductsName().get(0).getText().equals(previousFirstName)
                     );
 
-            List<String> pageNames = getNamesFromCurrentPage();
-            System.out.println("Page " + (i + 1) + ": " + pageNames);
-            allNames.addAll(pageNames);
+            allNames.addAll(getNamesFromCurrentPage());
+            i++;
         }
-
         return allNames;
     }
+
 
     public boolean isFilteredByCategory( String categoryName) {
         List<String> names=getAllNames();
@@ -330,7 +317,7 @@ public class FilterBar {
 
 
     public FilterBar searchFor(String query) {
-        WebElement firstProduct = productName.get(0); // grab BEFORE click
+        WebElement firstProduct = productName.get(0);
         searchInput.clear();
         searchInput.sendKeys(query);
         searchSubmitButton.click();
@@ -344,14 +331,7 @@ public class FilterBar {
         }
         return this;
     }
-//    public SortBar searchFor(String query) {
-//        searchInput.clear();
-//        searchInput.sendKeys(query);
-//        searchSubmitButton.click();
-//        new WebDriverWait(driver, Duration.ofSeconds(5))
-//                .until(ExpectedConditions.visibilityOf(searchResultCount));
-//        return this;
-//    }
+
 
     public List<String> getNamesFromPage() {
 
@@ -367,7 +347,7 @@ public class FilterBar {
 
         Map<String, List<String>> exceptions = Map.of(
                 "hammer", List.of("leather toolbelt")
-//                "pliers", List.of("some other product")  // add when you discover them
+//                "pliers", List.of("some other product")  //
         );
 
         List<String> knownExceptions = exceptions.getOrDefault(
@@ -381,7 +361,7 @@ public class FilterBar {
             boolean isKnownException = knownExceptions.contains(name.toLowerCase());
 
             if (!matchesName && !isKnownException) {
-                System.out.println("❌ Unexpected product: " + name);
+                System.out.println(" Unexpected product: " + name);
                 return false;
             }
         }

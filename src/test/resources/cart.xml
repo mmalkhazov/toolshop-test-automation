@@ -1,0 +1,23 @@
+<!-- cart.xml -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Cart Tests" verbose="1">
+
+    <test name="API - Cart">
+        <classes>
+            <class name="com.toolshop.tests.API.cart.CreateCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.AddItemToCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.GetCartApiTests"/>
+            <class name="com.toolshop.tests.API.cart.DeleteCartApiTests"/>
+        </classes>
+    </test>
+
+    <test name="UI - Cart">
+        <classes>
+            <class name="com.toolshop.tests.UI.Cart.AddProductToCardTest"/>
+            <class name="com.toolshop.tests.UI.Cart.DeleteProductFromCardTest"/>
+            <class name="com.toolshop.tests.UI.Cart.UpdateProductInShoppingCartTest"/>
+        </classes>
+    </test>
+
+</suite>

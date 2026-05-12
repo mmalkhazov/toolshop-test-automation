@@ -36,25 +36,82 @@ test {
 }
 
 
-task qa(type:Test) {
-    useTestNG()
+def configureBrowser(Test task) {
     if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
+        task.systemProperty 'browser', project.property('browser')
+    }
+    if (project.hasProperty('headless')) {
+        task.systemProperty 'headless', 'true'
     }
 }
 
-task qa1(type: Test) {
-    useTestNG() {
-        def suite1 = project.hasProperty("suite1")
-        def suite2 = project.hasProperty("suite2")
+task smoke(type: Test) {
+    description = 'Fast sanity check — critical path only, no E2E'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/smoke.xml' }
+    configureBrowser(it)
+}
 
-        if (suite1) {
-            suites 'src/test/resources/login.xml'
-        } else if (suite2) {
-            suites 'src/test/resources/registration.xml'
-        }
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
+task regression(type: Test) {
+    description = 'Full regression — all tests except E2E'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/regression.xml' }
+    configureBrowser(it)
+}
+
+task e2e(type: Test) {
+    description = 'End-to-end flows — UI checkout + API shopping flow'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/e2e.xml' }
+    configureBrowser(it)
+}
+
+
+task critical(type: Test) {
+    description = 'Only CRITICAL severity tests across all layers'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/critical.xml' }
+    configureBrowser(it)
+}
+
+task apiTests(type: Test) {
+    description = 'All API tests — user, product, cart'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/api.xml' }
+}
+
+task uiTests(type: Test) {
+    description = 'All UI tests — no E2E'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/ui.xml' }
+    configureBrowser(it)
+}
+
+
+task authTests(type: Test) {
+    description = 'Login, logout, registration — UI + API'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/auth.xml' }
+    configureBrowser(it)
+}
+
+task cartTests(type: Test) {
+    description = 'Cart tests — UI + API'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/cart.xml' }
+    configureBrowser(it)
+}
+
+task catalogTests(type: Test) {
+    description = 'Product search, sorting, filtering — UI + API'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/catalog.xml' }
+    configureBrowser(it)
+}
+
+task negativeTests(type: Test) {
+    description = 'All negative/validation tests — UI + API'
+    group = 'verification'
+    useTestNG { suites 'src/test/resources/negative.xml' }
+    configureBrowser(it)
 }

@@ -2,6 +2,7 @@ package com.toolshop.config;
 
 import com.google.common.io.Files;
 import com.toolshop.models.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,6 +59,11 @@ public class ApplicationManager {
         driver.get("https://practicesoftwaretesting.com/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[@data-test='nav-home']")
+                ));
         return driver;
     }
 

@@ -1,21 +1,31 @@
-.gradle
+# Gradle build output
+.gradle/
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### IntelliJ IDEA ###
-*.idea
-*.iws
+# Keep the Gradle wrapper — needed to build the project
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
 *.iml
+*.iws
 *.ipr
 out/
-/gradle/
-settings.gradle
-\gradlew
-gradlew/
-gradlew.bat
-*.log
-*.png
 
+# Allure
+allure-results/
+allure-report/
+
+# Screenshots captured on failure
+screenshots/
+
+# Logs
+*.log
+src/test_logs/
+
+# Credentials — never commit real passwords
 src/main/resources/config.properties
+
+# OS files
+.DS_Store
+Thumbs.db

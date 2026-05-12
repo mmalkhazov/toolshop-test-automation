@@ -9,23 +9,19 @@ import static io.restassured.RestAssured.given;
 
 public class ApiManager {
 
-
-    private static final String BASE_URL      = ConfigManager.get("base.url");
-    private static final String EMAIL         = ConfigManager.get("user.email");
-    private static final String PASSWORD      = ConfigManager.get("user.password");
-
-
-
-
     private String token;
 
-    public ApiManager startApi(){
-        RestAssured.baseURI= BASE_URL;
+    public ApiManager startApi() {
+        String baseUrl  = ConfigManager.get("base.url");
+        String email    = ConfigManager.get("user.email");
+        String password = ConfigManager.get("user.password");
+
+        RestAssured.baseURI = baseUrl;
         this.token = given()
                 .contentType(ContentType.JSON)
                 .body(Map.of(
-                        "email",    EMAIL,
-                        "password", PASSWORD
+                        "email",    email,
+                        "password", password
                 ))
                 .post("/users/login")
                 .then()
@@ -37,15 +33,6 @@ public class ApiManager {
         return this;
     }
 
-    public String getToken()        { return token; }
-    public String getBaseUrl()      { return BASE_URL; }
-
-
-
-    }
-
-
-
-
-
-
+    public String getToken()   { return token; }
+    public String getBaseUrl() { return ConfigManager.get("base.url"); }
+}

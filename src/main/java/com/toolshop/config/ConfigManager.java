@@ -14,7 +14,7 @@ public class ConfigManager {
                 .getClassLoader()
                 .getResourceAsStream("config.properties")) {
 
-            if (input != null) {        
+            if (input != null) {
                 properties.load(input);
             }
 

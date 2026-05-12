@@ -15,7 +15,8 @@ public class ApiManager {
         String baseUrl  = ConfigManager.get("base.url");
         String email    = ConfigManager.get("user.email");
         String password = ConfigManager.get("user.password");
-
+        System.out.println("DEBUG baseUrl=[" + baseUrl + "]");
+        System.out.println("DEBUG email=[" + email + "]");
         RestAssured.baseURI = baseUrl;
         this.token = given()
                 .contentType(ContentType.JSON)

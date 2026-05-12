@@ -34,6 +34,16 @@ jobs:
       - name: Run API tests
         run: ./gradlew apiTests --info || true
 
+      - name: Debug secrets reach
+        if: always()
+        run: |
+          echo "BASE_URL length: ${#BASE_URL}"
+          echo "USER_EMAIL length: ${#USER_EMAIL}"
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+
+
       - name: Print failed tests
         if: always()
         run: |

@@ -14,7 +14,9 @@ public class ConfigManager {
                 .getClassLoader()
                 .getResourceAsStream("config.properties")) {
 
-            properties.load(input);
+            if (input != null) {        
+                properties.load(input);
+            }
 
         } catch (IOException e) {
             throw new RuntimeException("Could not load config.properties", e);

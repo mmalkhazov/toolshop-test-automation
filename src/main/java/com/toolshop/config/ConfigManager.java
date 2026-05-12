@@ -22,6 +22,11 @@ public class ConfigManager {
     }
 
     public static String get(String key) {
-        return properties.getProperty(key);
+        String value = properties.getProperty(key);
+        if (value == null || value.isBlank()) {
+            String envKey = key.toUpperCase().replace(".", "_");
+            value = System.getenv(envKey);
+        }
+        return value;
     }
 }

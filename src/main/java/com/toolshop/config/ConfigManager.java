@@ -28,6 +28,7 @@ public class ConfigManager {
         if (value == null || value.isBlank()) {
             String envKey = key.toUpperCase().replace(".", "_");
             value = System.getenv(envKey);
+            System.out.println("ConfigManager: key=" + key + " envKey=" + envKey + " value=" + (value != null ? "FOUND" : "NULL"));
         }
         return value;
     }

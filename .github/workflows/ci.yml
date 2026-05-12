@@ -25,6 +25,12 @@ jobs:
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
 
+      - name: Debug environment
+        run: |
+          echo "BASE_URL is set: ${{ secrets.BASE_URL != '' }}"
+          env | grep -i base || echo "BASE_URL not found in env"
+          env | grep -i user || echo "USER vars not found in env"
+
       - name: Run API tests
         run: ./gradlew apiTests --info || true
 

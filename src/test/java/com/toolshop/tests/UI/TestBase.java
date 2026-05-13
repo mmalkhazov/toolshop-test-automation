@@ -24,7 +24,7 @@ public class TestBase {
     @BeforeSuite
     public void setUp() {
         driver = app.starTest();
-        new HomePage(driver).sortBar.waitForProductsToLoad();
+//        new HomePage(driver).sortBar.waitForProductsToLoad();
     }
 
 

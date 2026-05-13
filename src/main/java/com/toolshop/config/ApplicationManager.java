@@ -63,7 +63,7 @@ public class ApplicationManager {
 
         new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until(ExpectedConditions.presenceOfElementLocated(
-                        By.tagName("body")
+                        By.xpath("//nav")
                 ));
         return driver;
     }

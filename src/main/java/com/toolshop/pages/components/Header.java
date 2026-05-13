@@ -4,6 +4,7 @@ import com.toolshop.pages.ContactPage;
 import com.toolshop.pages.HomePage;
 import com.toolshop.pages.LoginPage;
 import com.toolshop.pages.ShoppingCartPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,8 +24,17 @@ public class Header  {
     @FindBy(xpath = "//a[@data-test='nav-home']")
     WebElement homePageButton;
 
+//    public HomePage goToHomePage() {
+//        homePageButton.click();
+//        return new HomePage(driver);
+//    }
+
     public HomePage goToHomePage() {
         homePageButton.click();
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//h5[@data-test='product-name']")
+                ));
         return new HomePage(driver);
     }
 

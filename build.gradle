@@ -41,7 +41,7 @@ def configureBrowser(Test task) {
         task.systemProperty 'browser', project.property('browser')
     }
     if (project.hasProperty('headless')) {
-        task.systemProperty 'headless', project.property('headless')
+        task.systemProperty 'headless', 'true'
     }
 }
 

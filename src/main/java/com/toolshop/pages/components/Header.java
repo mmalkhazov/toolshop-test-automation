@@ -30,11 +30,9 @@ public class Header  {
 //    }
 
     public HomePage goToHomePage() {
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.elementToBeClickable(homePageButton));
         homePageButton.click();
-        new WebDriverWait(driver, Duration.ofSeconds(30))
-                .until(ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//h5[@data-test='product-name']")
-                ));
         return new HomePage(driver);
     }
 
@@ -49,7 +47,14 @@ public class Header  {
     @FindBy(xpath="//a[@data-test='nav-sign-in']")
     WebElement LoginButton;
 
-    public LoginPage goToLoginInPage(){
+//    public LoginPage goToLoginInPage(){
+//        LoginButton.click();
+//        return new LoginPage(driver);
+//    }
+
+    public LoginPage goToLoginInPage() {
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.elementToBeClickable(LoginButton));
         LoginButton.click();
         return new LoginPage(driver);
     }

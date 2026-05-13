@@ -43,7 +43,8 @@ public class ApplicationManager {
                         "--no-sandbox",
                         "--disable-dev-shm-usage",
                         "--disable-gpu",
-                        "--window-size=1920,1080"
+                        "--window-size=1920,1080",
+                        "--remote-debugging-port=9222"
                 );
             }
             driver = new ChromeDriver(options);
@@ -60,10 +61,7 @@ public class ApplicationManager {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        new WebDriverWait(driver, Duration.ofSeconds(30))
-                .until(ExpectedConditions.presenceOfElementLocated(
-                        By.tagName("app-root")
-                ));
+       
         return driver;
     }
 

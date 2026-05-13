@@ -61,10 +61,7 @@ public class ApplicationManager {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        new WebDriverWait(driver, Duration.ofSeconds(30))
-                .until(ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//h5[@data-test='product-name']")
-                ));
+       
         return driver;
     }
 

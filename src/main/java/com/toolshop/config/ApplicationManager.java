@@ -61,7 +61,10 @@ public class ApplicationManager {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-       
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.presenceOfElementLocated(
+                        By.tagName("body")
+                ));
         return driver;
     }
 

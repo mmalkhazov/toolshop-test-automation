@@ -23,8 +23,7 @@ screenshots/
 *.log
 src/test_logs/
 
-# Credentials — never commit real passwords
-src/main/resources/config.properties
+
 
 # OS files
 .DS_Store

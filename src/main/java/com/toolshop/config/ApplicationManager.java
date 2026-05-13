@@ -60,7 +60,9 @@ public class ApplicationManager {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        
+        new org.openqa.selenium.support.ui.WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(d -> ((org.openqa.selenium.JavascriptExecutor) d)
+                        .executeScript("return document.readyState").equals("complete"));
         return driver;
     }
 

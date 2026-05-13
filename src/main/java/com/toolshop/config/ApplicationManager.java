@@ -60,14 +60,7 @@ public class ApplicationManager {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        try {
-            new WebDriverWait(driver, Duration.ofSeconds(60))
-                    .until(ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("//h5[@data-test='product-name']")
-                    ));
-        } catch (Exception e) {
-            logger.warn("Initial page load timed out — continuing, @BeforeMethod will handle navigation");
-        }
+        
         return driver;
     }
 

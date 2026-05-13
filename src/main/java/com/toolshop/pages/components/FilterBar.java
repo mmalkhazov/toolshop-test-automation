@@ -392,5 +392,9 @@ public class FilterBar {
         return getNamesFromPage().equals(expected);
     }
 
-
+    public FilterBar waitForProductsToLoad() {
+        new WebDriverWait(driver, Duration.ofSeconds(60))
+                .until(ExpectedConditions.visibilityOfAllElements(productName));
+        return this;
+    }
 }

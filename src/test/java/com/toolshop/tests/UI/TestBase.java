@@ -1,6 +1,7 @@
 package com.toolshop.tests.UI;
 
 import com.toolshop.config.ApplicationManager;
+import com.toolshop.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class TestBase {
     @BeforeSuite
     public void setUp() {
         driver = app.starTest();
+        new HomePage(driver).sortBar.waitForProductsToLoad();
     }
 
 

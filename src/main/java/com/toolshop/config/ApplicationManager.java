@@ -56,15 +56,10 @@ public class ApplicationManager {
             throw new IllegalArgumentException("Browser entered is not correct");
         }
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.manage().window().maximize();
         driver.get("https://practicesoftwaretesting.com/");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        // Wait for page to fully load
-        new org.openqa.selenium.support.ui.WebDriverWait(driver, Duration.ofSeconds(30))
-                .until(d -> ((org.openqa.selenium.JavascriptExecutor) d)
-                        .executeScript("return document.readyState").equals("complete"));
 
         return driver;
     }

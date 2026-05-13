@@ -62,7 +62,7 @@ public class ApplicationManager {
 
         new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//a[@data-test='nav-home']")
+                        By.tagName("app-root")
                 ));
         return driver;
     }

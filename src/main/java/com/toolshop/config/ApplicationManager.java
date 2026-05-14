@@ -57,6 +57,8 @@ public class ApplicationManager {
             throw new IllegalArgumentException("Browser entered is not correct");
         }
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.get("https://practicesoftwaretesting.com/");
 //        driver.manage().window().maximize();
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -72,6 +74,23 @@ public class ApplicationManager {
         logger.info("PAGE TITLE: " + driver.getTitle());
 
 
+
+        // new
+        if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
+            File screenshotDir = new File("screenshots");
+            if (!screenshotDir.exists()) screenshotDir.mkdirs();
+            File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File screenshot = new File("screenshots/startup-" + System.currentTimeMillis() + ".png");
+            try {
+                Files.copy(tmp, screenshot);
+                logger.info("Startup screenshot: " + screenshot.getAbsolutePath());
+            } catch (IOException e) {
+                logger.warn("Could not save startup screenshot: " + e.getMessage());
+            }
+            logger.info("PAGE SOURCE START: " +
+                    driver.getPageSource().substring(0, Math.min(1000, driver.getPageSource().length())));
+        }
+        // new
 
 
 

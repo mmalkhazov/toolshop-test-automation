@@ -43,7 +43,8 @@ public class ApplicationManager {
                         "--no-sandbox",
                         "--disable-dev-shm-usage",
                         "--disable-gpu",
-                        "--window-size=1920,1080"
+                        "--window-size=1920,1080",
+                        "--remote-allow-origins=*"
                 );
             }
             driver = new ChromeDriver(options);
@@ -57,8 +58,18 @@ public class ApplicationManager {
         }
 
         driver.get("https://practicesoftwaretesting.com/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(d -> ((org.openqa.selenium.JavascriptExecutor) d)
+                        .executeScript("return document.readyState").equals("complete"));
+
+        if (!Boolean.parseBoolean(System.getProperty("headless", "false"))) {
+            driver.manage().window().maximize();
+        }
+
+        logger.info("PAGE URL: " + driver.getCurrentUrl());
+        logger.info("PAGE TITLE: " + driver.getTitle());
 
 
 
@@ -79,13 +90,29 @@ public class ApplicationManager {
         return user;
     }
 
-    public String takeScreenshot() {
+//    public String takeScreenshot() {
+//
+//        File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//        File screenshot = new File("screenshots/screen-" + System.currentTimeMillis() + ".png");
+//
+//        try {
+//            Files.copy(tmp,screenshot);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return screenshot.getAbsolutePath();
+//    }
 
+
+    public String takeScreenshot() {
+        File screenshotDir = new File("screenshots");
+        if (!screenshotDir.exists()) {
+            screenshotDir.mkdirs();
+        }
         File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File screenshot = new File("screenshots/screen-" + System.currentTimeMillis() + ".png");
-
         try {
-            Files.copy(tmp,screenshot);
+            Files.copy(tmp, screenshot);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

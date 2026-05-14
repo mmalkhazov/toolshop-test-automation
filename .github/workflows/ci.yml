@@ -69,6 +69,14 @@ jobs:
       - name: Run UI tests (headless)
         run: ./gradlew uiTests -Pbrowser=chrome -Pheadless=true
 
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+            name: screenshots
+            path: screenshots/
+            retention-days: 3
+
       - name: Upload Allure results (UI)
         uses: actions/upload-artifact@v4
         if: always()

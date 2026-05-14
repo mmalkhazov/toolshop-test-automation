@@ -49,6 +49,9 @@ public class TestBase {
             logger.info("PASSED: " + result.getMethod().getMethodName());
         }else{
             logger.error("FAILED: " + result.getMethod().getMethodName() + "Screenshot path: " + app.takeScreenshot());
+            logger.error("Current URL: " + driver.getCurrentUrl());
+            logger.error("Page title: " + driver.getTitle());
+            logger.error("Screenshot: " + app.takeScreenshot());
         }
         logger.info("Stop test");
         logger.info("=============================================================");

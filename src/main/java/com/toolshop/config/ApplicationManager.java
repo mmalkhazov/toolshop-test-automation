@@ -92,8 +92,6 @@ public class ApplicationManager {
             logger.info("PAGE SOURCE START: " +
                     driver.getPageSource().substring(0, Math.min(1000, driver.getPageSource().length())));
         }
-        // new
-
 
 
         return driver;

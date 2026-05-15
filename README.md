@@ -266,5 +266,5 @@ The target site uses Cloudflare bot protection which blocks headless browsers fr
 
 **Malkhaz Malkhazov** — QA Engineer · ISTQB® Certified Tester Foundation Level (CTFL 4.0)
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/malkhaz-malkhazov)
+
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/mmalkhazov)
